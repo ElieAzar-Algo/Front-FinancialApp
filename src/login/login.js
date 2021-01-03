@@ -1,6 +1,6 @@
   import React from "react";
 import './login.css'
-//import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
   state = {
@@ -47,11 +47,12 @@ class Login extends React.Component {
   }
 
   render() {
-    // if(this.state.autho===200){
-    //     return(
-    //         <Redirect to= './home'/>
-    //     )
-    // }
+    if(this.state.autho===200){
+        return(
+            <Redirect to= './home'/>
+        )
+    }
+   
     return (
 
         <>
@@ -77,7 +78,7 @@ class Login extends React.Component {
 							<input type="submit" name="Sign In" value="Sign In"/>
 							<div className="registration">
 								Don't have an account ?
-								<a className="" href="signup.html">
+								<a className="" href="./register">
 									Create an account
 								</a>
 							</div>
