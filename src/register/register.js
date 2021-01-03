@@ -46,36 +46,51 @@ class Register extends React.Component {
             <Redirect to= './login'/>
         )
     }
-    return (
-      <div className="register">
-        <img src="" />
-        <form onSubmit={this.registerCheck} className="registerForm">
-          <br></br>
 
-          <input
-            type="text"
-            name="adminName"
-            placeholder="Username"
-            className="field"
-          />
-          <input
-            type="text"
-            name="adminEmail"
-            placeholder="Email"
-            className="field"
-          />
-          <input
-            type="password"
-            name="adminPassword"
-            className="field"
-            placeholder="Password"
-          />
-          <button type="submit" className="submitButton" className="subButton">
-            <span>Register</span>
-          </button>
-        </form>
-        <div></div>
-      </div>
+   
+    return (
+<>
+<div id="page-wrapper">
+			<div className="main-page signup-page">
+				<h2 className="title1">SignUp Here</h2>
+				<div className="sign-up-row widget-shadow">
+					<h5>Personal Information :</h5>
+				<form onSubmit={this.registerCheck} method="post">
+					<div className="sign-u">
+								<input type="text" name="firstname" placeholder="Name" required=""/>
+						<div className="clearfix"> </div>
+					</div>
+				
+					<div className="sign-u">
+								<input type="email" placeholder="Email Address" required=""/>
+						<div className="clearfix"> </div>
+					</div>
+		
+					<h6>Login Information :</h6>
+					<div className="sign-u">
+								<input type="password" placeholder="Password" required=""/>
+						<div className="clearfix"> </div>
+					</div>
+					<div className="sign-u">
+								<input type="password" placeholder="Confirm Password" required=""/>
+						</div>
+						<div className="clearfix"> </div>
+					<div className="sub_home">
+							<input type="submit" value="Submit"/>
+						<div className="clearfix"> </div>
+					</div>
+					<div className="registration">
+						Already Registered.
+						<a className="" href="./login">
+							Login
+						</a>
+					</div>
+				</form>
+				</div>
+			</div>
+		</div>
+
+</>
     );
   }
 }
