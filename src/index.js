@@ -6,14 +6,31 @@ import './index.css';
 import App from './App';
 import  Login from './login/login';
 import Register from './register/register';
+// install bootstrap using this command in cmd :  npm install bootstrap --save 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 ReactDOM.render(
   <React.StrictMode>
-   
-            <App />
+    <BrowserRouter>
+    <Switch>
+       
+          <Route path="/login">
           
-    
+            <Login />
+          </Route>
+          
+         
+          <Route path="/home">
+            <App />
+          </Route>
+          <Route path="/">
+          
+            <Register />
+          </Route>
+          
+        </Switch>
+        </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
