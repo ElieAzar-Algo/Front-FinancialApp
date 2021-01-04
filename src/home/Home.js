@@ -1,7 +1,7 @@
 import React from 'react';
 import './Home.css';
 import 'font-awesome/css/font-awesome.min.css';
-
+import Menu from '../menu/menu.js';
 
 
 class Home extends React.Component{
@@ -103,6 +103,7 @@ const TotalExpense=()=>{
  }
         return (
             <>
+           
 {/* <div>
   {this.state.incomes.map((income) => (
     <div key={income.id}>
@@ -115,9 +116,14 @@ const TotalExpense=()=>{
   ))}
 </div> */}
 <div className="cbp-spmenu-push">
+
 	<div className="main-content">
+  
+  
 <div id="page-wrapper">
 			<div className="main-page">
+     
+       
 
 <div className="col_3">
         	<div className="col-md-3 widget widget1">
