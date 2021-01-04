@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
 class Register extends React.Component {
   state = {
@@ -41,14 +41,12 @@ class Register extends React.Component {
   };
 
   render() {
-    if(this.state.autho===200){
-        return(
-            <Redirect to= './login'/>
-        )
+    if (this.state.autho === 200) {
+      return <Redirect to="./login" />;
     }
 
-   
     return (
+
 <>
 <div id="page-wrapper">
 			<div className="main-page signup-page">
@@ -89,7 +87,8 @@ class Register extends React.Component {
 			</div>
 		</div>
 
-</>
+     
+      </>
     );
   }
 }
