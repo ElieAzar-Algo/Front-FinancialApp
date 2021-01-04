@@ -57,18 +57,18 @@ class Register extends React.Component {
 					<h5>Personal Information :</h5>
 				<form onSubmit={this.registerCheck} method="post">
 					<div className="sign-u">
-								<input type="text" name="firstname" placeholder="Name" required=""/>
+								<input type="text" name="adminName" placeholder="Name" required=""/>
 						<div className="clearfix"> </div>
 					</div>
 				
 					<div className="sign-u">
-								<input type="email" placeholder="Email Address" required=""/>
+								<input type="email" name="adminEmail" placeholder="Email Address" required=""/>
 						<div className="clearfix"> </div>
 					</div>
 		
 					<h6>Login Information :</h6>
 					<div className="sign-u">
-								<input type="password" placeholder="Password" required=""/>
+								<input type="password" name="adminPassword" placeholder="Password" required=""/>
 						<div className="clearfix"> </div>
 					</div>
 					<div className="sign-u">
