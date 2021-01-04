@@ -56,7 +56,7 @@ class Register extends React.Component {
                 <div className="sign-u">
                   <input
                     type="text"
-                    name="firstname"
+                    name="adminName"
                     placeholder="Name"
                     required=""
                   />
@@ -64,13 +64,23 @@ class Register extends React.Component {
                 </div>
 
                 <div className="sign-u">
-                  <input type="email" placeholder="Email Address" required="" />
+                  <input
+                    type="email"
+                    name="adminEmail"
+                    placeholder="Email Address"
+                    required=""
+                  />
                   <div className="clearfix"> </div>
                 </div>
 
                 <h6>Login Information :</h6>
                 <div className="sign-u">
-                  <input type="password" placeholder="Password" required="" />
+                  <input
+                    type="password"
+                    name="adminPassword"
+                    placeholder="Password"
+                    required=""
+                  />
                   <div className="clearfix"> </div>
                 </div>
                 <div className="sign-u">

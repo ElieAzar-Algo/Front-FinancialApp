@@ -1,22 +1,18 @@
 import React from "react";
-import "./Categories.css";
-//import * as FaIcons from "react-icons/fa";
+import "./Users.css";
+
 import { Link } from "react-router-dom";
-// * as AiIcons from "react-icons/ai";
-//import * as IoIcons from "react-icons/io";
-//import Editcategories from "./Editcategories";
-//import Axios from "./";
+
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default class Categories extends React.Component {
+class Users extends React.Component {
   state = {
-    categories: [],
-    role: "",
+    users: [],
   };
 
   async componentDidMount() {
-    const url = "http://localhost:8000/api/category";
+    const url = "http://localhost:8000/api/users";
     const token = window.localStorage.getItem("token");
 
     const response = await fetch(url, {
@@ -30,10 +26,10 @@ export default class Categories extends React.Component {
     //console.log(response);
     const result = await response.json();
     console.log(result);
-    this.setState({ categories: result.categories.data });
-    console.log("hi", this.state.categories);
+    this.setState({ users: result.user });
+    console.log("hi", this.state.users);
   }
-  deletecategories = async (id) => {
+  deleteusers = async (id) => {
     const token = window.localStorage.getItem("token");
     const requestOptions = {
       method: "DELETE",
@@ -43,24 +39,24 @@ export default class Categories extends React.Component {
         Authorization: "Bearer " + token,
       },
     };
-    const url = `http://localhost:8000/api/category/${id}`;
+    const url = `http://localhost:8000/api/user/${id}`;
 
     try {
       const response = await fetch(url, requestOptions);
       const result = await response.json();
-      const refrechCategories = this.state.categories.filter(
-        (categories) => categories.id !== id
-      );
-      this.setState({ categories: refrechCategories });
+      const refrechusers = this.state.users.filter((users) => users.id !== id);
+      this.setState({ users: refrechusers });
     } catch (error) {
       console.log(error);
     }
   };
-  createcategories = async (e) => {
+  createusers = async (e) => {
     e.preventDefault();
     const token = window.localStorage.getItem("token");
 
     const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
     const requestOptions = {
       method: "POST",
@@ -71,10 +67,12 @@ export default class Categories extends React.Component {
       },
       body: JSON.stringify({
         name: name,
+        email: email,
+        password: password,
       }),
     };
     console.log(name);
-    const url = `http://localhost:8000/api/category`;
+    const url = `http://localhost:8000/api/users`;
     const response = await fetch(url, requestOptions);
     const result = await response.json();
     console.log(result);
@@ -88,10 +86,12 @@ export default class Categories extends React.Component {
   render() {
     return (
       <div className="tbl">
-        <FontAwesomeIcon icon={faTrash} />
-        <form onSubmit={this.createcategories}>
+        <form onSubmit={this.createusers}>
           <input type="text" name="name" placeholder="insert name"></input>
-          <input type="submit" name="add" placeholder="add categories"></input>
+          <input type="text" name="email" placeholder="insert email"></input>
+
+          <input type="text" name="password" placeholder="insert password" />
+          <input type="submit" name="add" placeholder="add user" />
         </form>
 
         <div className="tbl-header">
@@ -106,10 +106,10 @@ export default class Categories extends React.Component {
         <div className="tbl-content">
           <table cellPadding="0" cellSpacing="0" border="0">
             <tbody>
-              {this.state.categories.map((category, index) => (
+              {this.state.users.map((users, index) => (
                 <tr key={index}>
-                  <td> {category.id}</td>
-                  <td>{category.name}</td>
+                  <td> {users.id}</td>
+                  <td>{users.name}</td>
 
                   <td>
                     <div>
@@ -124,7 +124,7 @@ export default class Categories extends React.Component {
 
                       <FontAwesomeIcon
                         icon={faTrash}
-                        onClick={() => this.deletecategories(category.id)}
+                        onClick={() => this.deleteusers(users.id)}
                       />
                     </div>
                   </td>
@@ -138,15 +138,4 @@ export default class Categories extends React.Component {
   }
 }
 
-{
-  /* <FaIcons.FaEdit />
-                      </Link> */
-}
-{
-  /* <Link className="icon"> */
-}
-{
-  /* <FaIcons.FaMinusCircle
-                          onClick={() => this.deletecategories(categories.id)}
-                        /> */
-}
+export default Users;
