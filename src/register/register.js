@@ -66,7 +66,6 @@ class Register extends React.Component {
 						<div className="clearfix"> </div>
 					</div>
 		
-					<h6>Login Information :</h6>
 					<div className="sign-u">
 								<input type="password" name="adminPassword" placeholder="Password" required=""/>
 						<div className="clearfix"> </div>
