@@ -101,7 +101,7 @@ const TotalExpense=()=>{
   t= TotalIncome()-TotalExpense();
   return t;
  }
-        return (
+        return ( 
             <>
            
 {/* <div>
@@ -117,7 +117,7 @@ const TotalExpense=()=>{
 </div> */}
 <div className="cbp-spmenu-push">
 
-	<div className="main-content">
+	<div className="main_content">
   
   
 <div id="page-wrapper">

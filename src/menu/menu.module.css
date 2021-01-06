@@ -1,0 +1,62 @@
+.SideMenu{
+    height: 100vh;
+    width: 20%;
+    background-color:var(--primary-dark);
+    display: flex;
+    flex-direction: column;
+    padding:0;
+    margin:0;
+}
+
+.Header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding: 15px 20px;
+}
+
+.Header h1{
+    font-size: 25px;
+    font-weight: 900;
+    color: white;
+}
+
+.Header img{
+    width: 20%;
+    margin-right: 10px;
+}
+
+.ButtonsContainer{
+    padding:0;
+    margin:0;
+    position: relative;
+    list-style: none;
+    width: 100%;
+    height:100%;
+}
+
+
+.ButtonsContainer li{
+    margin-top: 5px;
+    width: 100%;
+    padding: 15px 20px;
+    background-color: var(--primary-light);
+    color: #000;
+ }
+
+ .ButtonsContainer li span{
+     padding-right: 10px;
+ }
+
+
+
+
+.LogOut{
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
+
+
