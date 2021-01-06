@@ -36,7 +36,7 @@ ul,label{
 body a:hover{
 	text-decoration:none;
 }
-.main-content {
+.main_content {
     position: relative;
 }
 .sidebar-left .navbar-brand {
@@ -898,7 +898,7 @@ ul.dropdown-menu.drp-mnu li {
 	text-decoration:underline;
 }
 /*---//footer---*/
-/*---main-content-start---*/
+/*---main_content-start---*/
 .widget {
     width: 32%;
     border: 1px solid #F5F1F1;
@@ -1190,7 +1190,7 @@ ul.info li {
     padding: 1em 1.5em 1.5em;
 }
 /*--//calender --*/
-/*---//main-content---*/
+/*---//main_content---*/
 /*-- media --*/
 h2.title1,h3.title1 {
     font-size: 1.7em;
