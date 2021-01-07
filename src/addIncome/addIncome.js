@@ -22,7 +22,54 @@ class AddIncome extends React.Component{
         const category_id = e.target.category_id.value;
         //const type_id = e.target.type_id.value;
         const start_date = e.target.start_date.value
-        const end_date = e.target.end_date.value
+        const period = e.target.period.value;
+        const repeated= e.target.repeated.value;
+       
+        const end_date=()=>{
+            var d=new Date(start_date);  //2020-01-01
+            var db_date_format="";
+            var n="";
+           
+            
+            if(period==="weekly"){
+               
+                var newWeek= d.setDate(d.getDate(start_date)+(repeated*7));
+                n = d.toISOString(newWeek);
+                db_date_format=new Intl.DateTimeFormat('fr-ca', { year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date(Date.parse(n)))
+                //console.log(db_date_format);
+            }
+            else if(period==="monthly"){
+                
+                var newMonth= d.setMonth(d.getMonth(start_date)+(repeated*1));
+                n = d.toISOString(newMonth);
+                db_date_format=new Intl.DateTimeFormat('fr-ca', { year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date(Date.parse(n)))
+                //console.log(db_date_format);
+            }
+            else if(period==="yearly"){
+                var newYear= d.setFullYear(d.getFullYear(start_date)+(repeated*1));
+                n = d.toISOString(newYear);
+                db_date_format=new Intl.DateTimeFormat('fr-ca', { year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date(Date.parse(n)))
+                console.log(db_date_format);
+
+            }
+            return db_date_format;
+        }
+        const type_id=()=>{
+            let type=1;
+            if(period==="weekly"){
+                type=2;
+            }
+            else if(period==="monthly"){
+                type=3;
+            }
+            else if(period==="yearly"){
+                type=4;
+            }
+            return type;
+        }
+        
+        console.log(end_date()); 
+        console.log(type_id())   
     
     
         const requestOptions = {
@@ -38,9 +85,9 @@ class AddIncome extends React.Component{
             amount: amount,
             date:date,
             category_id:category_id,
-           // type_id:type_id,
+            type_id:type_id(),
             start_date:start_date,
-            end_date:end_date
+            end_date:end_date()
           }),
         };
         
@@ -56,10 +103,10 @@ class AddIncome extends React.Component{
         console.log("my Recurring ", this.myRecurring.current.style.display)
         console.log("my Fixed ",this.myFixed.current)
         
-        if (val==1){
+        if (val==2){
             this.myRecurring.current.style.display="block";
             this.myFixed.current.style.display="none";
-        }else if(val==2){
+        }else if(val==1){
             this.myRecurring.current.style.display="none";
             this.myFixed.current.style.display="block";
 
@@ -213,9 +260,9 @@ class AddIncome extends React.Component{
             <div className="container">
                 <div className="row row-content">
                     <form onChange={this.Switch}>
-                    <input type="radio" id="fixed" name="type_id" value="2" defaultChecked />
+                    <input type="radio" id="fixed" name="type_id" value="1" defaultChecked />
                     <label htmlFor="fixed" > Fixed</label>
-                    <input type="radio" id="recurring" name="type_id" value="1"/>
+                    <input type="radio" id="recurring" name="type_id" value="2"/>
                     <label htmlFor="recurring">Recurring</label>
                     </form>
                     
@@ -250,7 +297,7 @@ class AddIncome extends React.Component{
                 <select id="period" name="period">
                 <option value="yearly">Yearly</option>
                 <option value="monthly">Monthly</option>
-                <option value="daily">Weekly</option>
+                <option value="weekly">Weekly</option>
                 </select>
                 </label>
                 <label htmlFor="repeated" >Repeated Time
