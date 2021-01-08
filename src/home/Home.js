@@ -17,7 +17,7 @@ class Home extends React.Component{
 //----------------------------------------------------------------------------------------//
 //                                fetch Incomes                                           //
 //----------------------------------------------------------------------------------------//
-    const incomesurl = "http://localhost:8000/api/incomes";
+    const incomesurl = "http://localhost:8000/api/report/income?startdate=2010-2-14&enddate=2030-2-20";
    const token= window.localStorage.getItem("token")
    console.log(token)
 
@@ -31,7 +31,9 @@ class Home extends React.Component{
     }).catch(function (error) {
       console.log(error);
     });
+    
     const incomesRes = await incomesResponse.json();
+    console.log(incomesRes);
     this.setState({incomes:incomesRes.income})
     const incomesResult = await incomesResponse.status;
    // console.log(res);
