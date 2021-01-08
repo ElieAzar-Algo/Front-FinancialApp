@@ -4,47 +4,45 @@ import Menu from '../menu/menu'
 
 
 
-class AddIncome extends React.Component{
+class AddExpense extends React.Component{
     constructor(props) {
         super(props);
         this.myFixed = React.createRef();
         this.myRecurring = React.createRef();
          }
          state={
-          categories:[]
+             categories:[]
+         }
+
+      //-----------------------------------------------------------------------------------------------------------//
+      //         fetching categories using api, set categories state and sending token from locale storage         //
+      //-----------------------------------------------------------------------------------------------------------//
+      async componentDidMount(){
+          
+        this.myRecurring.current.style.display="none";
+
+        const url = "http://localhost:8000/api/category";
+        const token = window.localStorage.getItem("token");
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
+        //console.log(response);
+        const result = await response.json();
+        //console.log(result);
+        this.setState({ categories: result.categories.data });
+        console.log("hi", this.state.categories);
       }
 
-   //-----------------------------------------------------------------------------------------------------------//
-   //         fetching categories using api, set categories state and sending token from locale storage         //
-   //-----------------------------------------------------------------------------------------------------------//
-   async componentDidMount(){
-     
-    this.myRecurring.current.style.display="none";
-
-     const url = "http://localhost:8000/api/category";
-     const token = window.localStorage.getItem("token");
-     const response = await fetch(url, {
-       method: "GET",
-       headers: {
-         Accept: "application/json",
-         "Content-Type": "application/json",
-         Authorization: "Bearer " + token,
-       },
-     });
-     //console.log(response);
-     const result = await response.json();
-     //console.log(result);
-     this.setState({ categories: result.categories.data });
-     console.log("hi", this.state.categories);
-   }
-
-
-   //-----------------------------------------------------------------------------------------------------------//
-   //                    Create Income function allows the user to add NEW income record                       //
-   //-----------------------------------------------------------------------------------------------------------//
-
+      //-----------------------------------------------------------------------------------------------------------//
+      //                    Create Expense function allows the user to add NEW income record                       //
+      //-----------------------------------------------------------------------------------------------------------//
        
-    createIncome = async (e) => {
+    createExpense = async (e) => {
         e.preventDefault();
 
         const token = window.localStorage.getItem("token");
@@ -59,33 +57,29 @@ class AddIncome extends React.Component{
         const repeated= e.target.repeated.value;
 
       //-----------------------------------------------------------------------------------------------------------//
-      //                   calculate the end date for recurring incomes and reformat the date output              //
+      //                   calculate the end date for recurring expenses and reformat the date output              //
       //-----------------------------------------------------------------------------------------------------------//
-       
         const end_date=()=>{
-            var d=new Date(start_date);  //20xx-xx-xx
+            var d=new Date(start_date);  //2020-01-01
             var val=e.target.type_id.value;
             var db_date_format="";
             var n="";
-           
             
-            if(val==2 && period==="weekly"){
-              
+            if(val===2 && period==="weekly"){
                
                 var newWeek= d.setDate(d.getDate(start_date)+(repeated*7));
                 n = d.toISOString(newWeek);
                 db_date_format=new Intl.DateTimeFormat('fr-ca', { year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date(Date.parse(n)))
                 
             }
-            else if(val==2 && period==="monthly"){
+            else if(val===2 && period==="monthly"){
                 
                 var newMonth= d.setMonth(d.getMonth(start_date)+(repeated*1));
                 n = d.toISOString(newMonth);
                 db_date_format=new Intl.DateTimeFormat('fr-ca', { year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date(Date.parse(n)))
                 
             }
-            else if(val==2 && period==="yearly"){
-              
+            else if(val===2 && period==="yearly"){
                 var newYear= d.setFullYear(d.getFullYear(start_date)+(repeated*1));
                 n = d.toISOString(newYear);
                 db_date_format=new Intl.DateTimeFormat('fr-ca', { year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date(Date.parse(n)))
@@ -108,12 +102,11 @@ class AddIncome extends React.Component{
         }
         
         console.log("End Date --> ",end_date()); 
-        console.log("Type ID --> ",type_id()); 
-
+        console.log("Type ID --> ",type_id());  
+    
       //-----------------------------------------------------------------------------------------------------------//
-      //                  fetching the incomes using api and sending token from locale storage                     //
+      //                 fetching the expenses using api and sending token from locale storage                     //
       //-----------------------------------------------------------------------------------------------------------//
-   
         const requestOptions = {
           method: "POST",
           headers: {
@@ -133,13 +126,15 @@ class AddIncome extends React.Component{
           }),
         };
         
-        const url = `http://localhost:8000/api/income`;
+        const url = `http://localhost:8000/api/expense`;
         const response = await fetch(url, requestOptions);
-        const result = await response.json();
-        //console.log(result);
+        //const result = await response.json();
+        console.log(response);
         await e.target.reset();
         
+        
       };
+      
       //-----------------------------------------------------------------------------------------------------------//
       //                      the end of create income function and start switch inputs function                   //
       //-----------------------------------------------------------------------------------------------------------//
@@ -166,7 +161,7 @@ class AddIncome extends React.Component{
       }
 
     render(){
-      
+
 
         return (
           <>
@@ -179,11 +174,11 @@ class AddIncome extends React.Component{
 
                   <div className="col-9">
                 <div className="col-12">
-                  <h2> <i className="fa fa-line-chart" aria-hidden="true" style={{paddingRight:"2%"}}></i> <srtong> Add Income </srtong></h2>
+                  <h2> <i className="fa fa-line-chart" aria-hidden="true" style={{paddingRight:"2%"}}></i> Add Expense </h2>
                 </div>
               
-              <form  method="POST" onSubmit={this.createIncome} action="#" >
-              <h6>Income Type</h6>
+              <form  method="POST" onSubmit={this.createExpense} >
+              <h6>Expense Type</h6>
                   <div className="form-group row ">
                     
                     <div className="col-3">
@@ -193,7 +188,7 @@ class AddIncome extends React.Component{
 
                     <div className="col-3"> 
                     <label htmlFor="recurring"  className="col-form-label">Recurring
-                    <input type="radio" className="form-control" id="recurring" name="type_id" value="2"  onChange={this.Switch}/>
+                    <input type="radio" className="form-control" id="recurring" name="type_id" value="2" onChange={this.Switch}/>
                     </label></div>
                    </div>
               
@@ -208,7 +203,7 @@ class AddIncome extends React.Component{
                       <div className="form-group row ">
                       <div className="col-10">
                          <label  htmlFor="description" className="col-form-label"> Description: </label>
-                           <input type="text" name="description" id="description"  placeholder="Enter a description"  style={{paddingRight:"80%"}} />
+                           <input type="text" name="description" id="description"  placeholder="Enter a description" style={{paddingRight:"80%"}} />
                           </div>
                       </div>
 
@@ -222,7 +217,7 @@ class AddIncome extends React.Component{
                      <div className="row form-group" ref={this.myFixed}>
                         <div className="col-10">
                            <label  htmlFor="date" className="col-form-label"> Date: </label>
-                           <input type="date" name="date" id="date" style={{paddingRight:"85%"}} />
+                           <input type="date" name="date" id="date"  style={{paddingRight:"85%"}} />
                           </div>
                       </div>
 
@@ -286,4 +281,4 @@ class AddIncome extends React.Component{
         );
     }
 }
-export default AddIncome;
+export default AddExpense;
