@@ -5,16 +5,17 @@ import Login from './login/login.js';
 import Home from './home/Home';
 import Menu from './menu/menu';
 import AddIncome from './addIncome/addIncome';
-import Test from './home/Test'
+import Test from './home/Test';
+import AddExpense from './addExpense/addExpense'
   
 
 function App() {
   return (
-    <div className="App">
-      <header>
+    
+      <>
        <AddIncome/>
-      </header>
-    </div>
+      </>
+   
   );
 }
 
