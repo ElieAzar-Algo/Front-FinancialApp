@@ -80,7 +80,7 @@ class AddExpense extends React.Component{
                 
             }
             else if(val===2 && period==="yearly"){
-                var newYear= d.setFullYear(d.getFullYear(start_date)+(repeated*1));
+                var newYear= d.setFullYear(d  .getFullYear(start_date)+(repeated*1));
                 n = d.toISOString(newYear);
                 db_date_format=new Intl.DateTimeFormat('fr-ca', { year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date(Date.parse(n)))
                 
