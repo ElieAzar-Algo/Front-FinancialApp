@@ -84,6 +84,11 @@ class Home extends React.Component{
 
     
     render(){
+    //   if(!localStorage){
+    //     return(
+    //         <Redirect to= './login'/>
+    //     )
+    // }
 
 const TotalIncome= ()=>{
   var t=0;
