@@ -19,7 +19,7 @@ class AddIncome extends React.Component{
    //-----------------------------------------------------------------------------------------------------------//
    async componentDidMount(){
      
-    this.myRecurring.current.style.display="none";
+      this.myRecurring.current.style.display="none";
 
      const url = "http://localhost:8000/api/category";
      const token = window.localStorage.getItem("token");

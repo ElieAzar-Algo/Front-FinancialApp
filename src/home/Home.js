@@ -1,7 +1,9 @@
 import React from 'react';
-import './Home.css';
+import  './Home.css';
 import 'font-awesome/css/font-awesome.min.css';
 import Menu from '../menu/menu.js';
+import {ProgressBar} from "react-bootstrap";
+import {Redirect} from 'react-router-dom'
 
 
 class Home extends React.Component{
@@ -17,7 +19,7 @@ class Home extends React.Component{
 //----------------------------------------------------------------------------------------//
 //                                fetch Incomes                                           //
 //----------------------------------------------------------------------------------------//
-    const incomesurl = "http://localhost:8000/api/report/income?startdate=2010-2-14&enddate=2030-2-20";
+    const incomesurl = "http://localhost:8000/api/income";
    const token= window.localStorage.getItem("token")
    console.log(token)
 
@@ -34,7 +36,7 @@ class Home extends React.Component{
     
     const incomesRes = await incomesResponse.json();
     console.log(incomesRes);
-    this.setState({incomes:incomesRes.income})
+    await this.setState({incomes:incomesRes.income})
     const incomesResult = await incomesResponse.status;
    // console.log(res);
    console.log(this.state.incomes);
@@ -52,7 +54,7 @@ class Home extends React.Component{
 //                                fetch the expenses                                      //
 //----------------------------------------------------------------------------------------//
 
-    const expensesurl = "http://localhost:8000/api/expenses";
+    const expensesurl = "http://localhost:8000/api/expense";
    
     const expensesResponse = await fetch(expensesurl, {
       method: "GET",
@@ -65,7 +67,7 @@ class Home extends React.Component{
       console.log(error);
     });
     const expensesRes = await expensesResponse.json();
-    this.setState({expenses:expensesRes.expense})
+    await this.setState({expenses:expensesRes.expense})
     const expensesResult = await expensesResponse.status;
    // console.log(res);
    console.log(this.state.expenses);
@@ -83,7 +85,7 @@ class Home extends React.Component{
     
     render(){
 
-const TotalIncome=()=>{
+const TotalIncome= ()=>{
   var t=0;
   this.state.incomes.map((income)=>(
     t=income.amount+t
@@ -91,33 +93,254 @@ const TotalIncome=()=>{
   return t;
 }
 
-const TotalExpense=()=>{
+const TotalExpense= ()=>{
   var t=0;
   this.state.expenses.map((expense)=>(
     t=expense.amount+t
   ))
   return t;
 }
- const TotalGrowth=()=>{
+ const TotalGrowth= ()=>{
   var t=0;
   t= TotalIncome()-TotalExpense();
   return t;
  }
-        return ( 
-            <>
-           
-{/* <div>
-  {this.state.incomes.map((income) => (
-    <div key={income.id}>
-    <ul >
-      <li>{income.name}</li>
-      <li>{income.description}</li>
-      <li>{income.amount}</li>
-    </ul>
-    </div>
-  ))}
-</div> */}
-<div className="cbp-spmenu-push">
+        return (
+          <>
+            <div className="row home-content">
+              <div className="col-3">
+                <Menu />
+              </div>
+              <div className="col-9 home-middle-container" style={{}}>
+                <div
+                  className="row home-page-header"
+                  style={{ marginTop: "10%" }}
+                >
+                  <div className="col-3">
+                    <i className="fa fa-plus-circle fa-4x fa-center icon-rounded"></i>
+                    <div className="stats">
+                      <h5>Add New Income</h5>
+                    </div>
+                  </div>
+
+                  <div className="col-3">
+                    <i className="fa fa-plus-circle fa-4x icon-rounded"></i>
+                    <div className="stats">
+                      <h5>Add New Expense</h5>
+                    </div>
+                  </div>
+
+                  <div className="col-3">
+                    <i className="fa fa-plus-circle fa-4x icon-rounded"></i>
+                    <div className="stats">
+                      <h5>Add New Category</h5>
+                    </div>
+                  </div>
+
+                  <div className="col-3">
+                    <a className="btn btn-lg btn-success" href="#">
+                      <i className="fa fa-gbp fa-2x pull-left"></i>
+                      <h5>
+                        <strong>
+                          <TotalIncome />
+                        </strong>
+                      </h5>
+                      <span>Total Income</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div
+                  className="row"
+                  style={{ marginTop: "50px", marginLeft: "0%", width: "100%" }}
+                >
+                  <div className="col-12 test">
+                    <div className="row">
+                      <div className="col-3 testt">
+                        <div className="card l-bg-green-dark testtt">
+                          <div className="card-statistic-3 p-4">
+                            <div className="card-icon card-icon-large">
+                              <i className="fas fa-shopping-cart"></i>
+                            </div>
+                            <div className="mb-4">
+                              <h5 className="card-title mb-0">New Orders</h5>
+                            </div>
+                            <div className="row align-items-center mb-2 d-flex">
+                              <div className="col-8">
+                                <h2 className="d-flex align-items-center mb-0">
+                                  10,243
+                                </h2>
+                              </div>
+                              <div className="col-4 text-right">
+                                <span>
+                                  12.5% <i className="fa fa-arrow-up"></i>
+                                </span>
+                              </div>
+                            </div>
+                            <div
+                              className="progress mt-1 "
+                              data-height="8"
+                              style={{ height: "8px" }}
+                            >
+                              <div
+                                className="progress-bar l-bg-cyan"
+                                role="progressbar"
+                                data-width="25%"
+                                aria-valuenow="25"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style={{ width: "25%" }}
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-3 testt">
+                        <div className="card l-bg-blue-dark testtt">
+                          <div className="card-statistic-3 p-4">
+                            <div className="card-icon card-icon-large">
+                              <i className="fas fa-shopping-cart"></i>
+                            </div>
+                            <div className="mb-4">
+                              <h5 className="card-title mb-0">New Orders</h5>
+                            </div>
+                            <div className="row align-items-center mb-2 d-flex">
+                              <div className="col-8">
+                                <h2 className="d-flex align-items-center mb-0">
+                                  10,243
+                                </h2>
+                              </div>
+                              <div className="col-4 text-right">
+                                <span>
+                                  12.5% <i className="fa fa-arrow-up"></i>
+                                </span>
+                              </div>
+                            </div>
+                            <div
+                              className="progress mt-1 "
+                              data-height="8"
+                              style={{ height: "8px" }}
+                            >
+                              <div
+                                className="progress-bar l-bg-cyan"
+                                role="progressbar"
+                                data-width="25%"
+                                aria-valuenow="25"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style={{ width: "25%" }}
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-3 testt">
+                        <div className="card l-bg-cherry testtt">
+                          <div className="card-statistic-3 p-4">
+                            <div className="card-icon card-icon-large">
+                              <i className="fas fa-shopping-cart"></i>
+                            </div>
+                            <div className="mb-4">
+                              <h5 className="card-title mb-0">New Orders</h5>
+                            </div>
+                            <div className="row align-items-center mb-2 d-flex">
+                              <div className="col-8">
+                                <h2 className="d-flex align-items-center mb-0">
+                                  10,243
+                                </h2>
+                              </div>
+                              <div className="col-4 text-right">
+                                <span>
+                                  12.5% <i className="fa fa-arrow-up"></i>
+                                </span>
+                              </div>
+                            </div>
+                            <div
+                              className="progress mt-1 "
+                              data-height="8"
+                              style={{ height: "8px" }}
+                            >
+                              <div
+                                className="progress-bar l-bg-cyan"
+                                role="progressbar"
+                                data-width="25%"
+                                aria-valuenow="25"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                style={{ width: "25%" }}
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-3">
+                        <a className="btn btn-lg btn-warning"  style={{marginTop:"10%"}} href="#">
+                          <i className="fa fa-shopping-cart fa-2x pull-left"></i>
+                          <h5>
+                            <strong>
+                              <TotalExpense />
+                            </strong>
+                          </h5>
+                          <span>Total Expense</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-9">
+                    <div className="row" style={{ marginTop: "5%" }}>
+                      <div className="col-7">
+                        <h5>
+                          <strong>Monthly Goal</strong>
+                        </h5>
+                      </div>
+                      <div className="col-5">
+                        <h5> 10000$ </h5>
+                      </div>
+                    </div>
+
+                    <div className="row ">
+                      <div className="col-12">
+                        <i></i>
+                        <ProgressBar>
+                          <ProgressBar
+                            animated
+                            striped
+                            variant="success"
+                            now={35}
+                            key={1}
+                          />
+                          <ProgressBar variant="warning" now={20} key={2} />
+                          <ProgressBar
+                            animated
+                            striped
+                            variant="danger"
+                            now={10}
+                            key={3}
+                          />
+                        </ProgressBar>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-3">
+                    <a className="btn btn-lg btn-primary" href="#" style={{}}>
+                      <i className="fa fa-flag fa-2x pull-left"></i>
+                      <h5>
+                        <strong>
+                          <TotalGrowth />
+                        </strong>
+                      </h5>
+                      <span>Total Growth</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* <div className="cbp-spmenu-push">
 
 	<div className="main_content">
   
@@ -161,9 +384,9 @@ const TotalExpense=()=>{
         </div>
         </div>
         </div>
-        </div>
-            </>
-        )
+        </div> */}
+          </>
+        );
     }
 }
 export default Home;

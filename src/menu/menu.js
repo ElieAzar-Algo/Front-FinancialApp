@@ -3,14 +3,37 @@ import { Link } from 'react-router-dom';
 //import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent} from 'react-pro-sidebar';
 //import 'react-pro-sidebar/dist/css/styles.css';
 import Logo from  '../assests/Upper.png';
-import Redirect from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import Classes from './menu.module.css';
 
 
 class Smenu extends React.Component{
 
+  logout = async (e)=>{
+    e.preventDefault();
+    const url="http://localhost:8000/api/logout";
+    const token=window.localStorage.getItem("token")
+    const body={
+
+    }
+   const respond= await fetch(url,{
+     method:"POST",
+     headers:{
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },body:JSON.stringify(body)
+   })
+   console.log(respond);
+   const result= await respond.json()
+   console.log(result);
+  await localStorage.removeItem('token');
+  
+  }
+
 
     render(){
+     
      
         return (
             <>
@@ -38,45 +61,19 @@ class Smenu extends React.Component{
                     <li>
                   <Link to="/categories"><span className="fa fa-category fa-sm"></span>Categories</Link>
                     </li>
-                    <li className={Classes.LogOut}>
-                  <Link to="/logout">Logout</Link>
+                    <li className={Classes.LogOut} onClick={this.logout}>
+                  <Link to='/login'   >Logout</Link>
+                
                     </li>
                   </ul>
-
-              
-
-
-
-            </div>
+                 </div>
 
 
 
 
 
 
-            {/* <div style={{height:"500px"}}>
-<ProSidebar >
-  <Menu iconShape="square" >
-  <SidebarHeader >
-    <MenuItem icon=" ">FINANCIAL APP</MenuItem>
-  </SidebarHeader>
-  <SidebarContent>
-      <MenuItem icon="">Dashboard</MenuItem>
-      <MenuItem>Login <Link to="/login" /></MenuItem>
-      <MenuItem >Categories<Link to="/categories" /></MenuItem>
-      <MenuItem >Expenses & Incomes<Link to="/exp-inc" /></MenuItem>
-      <MenuItem >User Management<Link to="/users" /></MenuItem>
-      <MenuItem >Generate Reports<Link to="/reports" /></MenuItem>
-   
-    </SidebarContent>
-    <SidebarFooter>
-    <MenuItem className="mb=0">Logout <Link to="/logout" /></MenuItem>
-    
-  </SidebarFooter>
-  </Menu>
-</ProSidebar>
-
-</div> */}
+      
             </>
         )
     }

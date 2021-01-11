@@ -16,6 +16,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
+        
         <Route path="/login">
           <Login />
         </Route>
