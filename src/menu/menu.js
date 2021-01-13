@@ -53,10 +53,10 @@ class Smenu extends React.Component{
                   <Link to="/Users"><span className="fa fa-user fa-sm"></span>User</Link>
                     </li>
                     <li>
-                  <Link to="/addIncome"><span className="fa fa-cash fa-sm"></span>Create New Income</Link>
+                  <Link to="/AddIncome"><span className="fa fa-cash fa-sm"></span>Create New Income</Link>
                     </li>
                     <li>
-                  <Link to="/addExpense"><span className="fa fa-coin fa-sm"></span>Create New Income</Link>
+                  <Link to="/AddExpense"><span className="fa fa-coin fa-sm"></span>Create New Income</Link>
                     </li>
                     <li>
                   <Link to="/categories"><span className="fa fa-category fa-sm"></span>Categories</Link>
