@@ -3,7 +3,7 @@ import  './Home.css';
 import 'font-awesome/css/font-awesome.min.css';
 import Menu from '../menu/menu.js';
 import {ProgressBar} from "react-bootstrap";
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 
 class Home extends React.Component{
@@ -57,12 +57,11 @@ class Home extends React.Component{
             
     } 
     else {
-      alert("cannot fetch the incomes");
+      return(<Redirect to="/login"/>)
     }
     //
     let highestInc=Math.max.apply(Math,this.state.allIncomes.map((h)=>{return h.amount;}));
     this.setState({highestIncome:highestInc.toLocaleString()})
-    
     //console.log(highestInc)
     
 
@@ -94,7 +93,8 @@ class Home extends React.Component{
           console.log("Loaded Successfully");
         } 
     else {
-      alert("cannot fetch the expenses");
+      //alert("cannot fetch the expenses");
+      return(<Redirect to="/login"/>)
     }
     let highestExp=Math.max.apply(Math,this.state.allExpenses.map((j)=>{return j.amount;}));
     this.setState({highestExpense:highestExp.toLocaleString()})
@@ -124,7 +124,7 @@ class Home extends React.Component{
           console.log("goals are Loaded Successfully");
         } 
     else {
-      alert("cannot fetch the goals");
+      return(<Redirect to="/login"/>)
     }
 const Goal= await this.state.goals.filter((goal)=>(goal.status=="Yearly"));
 this.setState({yearlyGoal:Goal[0].target})
@@ -137,6 +137,9 @@ this.setState({monthlyGoal:Goalm[0].target.toLocaleString()})
   
      
     render(){
+      if (!this.state.incomesCategories|| !this.state.expensesCategories ||!this.state.allIncomes){
+       return( <Redirect to="/login"/>)
+      }
       const incObj = this.state.incomesCategories
       //console.log(incObj);
       let maxCategoryInc = "";
@@ -169,9 +172,15 @@ this.setState({monthlyGoal:Goalm[0].target.toLocaleString()})
                 <Menu />
               </div>
               <div className="col-9 home-middle-container" style={{}}>
+                <div className=" row" style={{padding:"0px", marginTop:"2%"}}>
+                  <div className="col-11 jumbotron" style={{padding:"1%"}}>
+                  <i className="fa fa-user-circle fa-3x pull-right"></i>
+                  </div>
+
+                </div>
                 <div
                   className="row home-page-header"
-                  style={{ marginTop: "10%" }}
+                  style={{ marginTop: "3%" }}
                 >
                   <div className="col-3">
                    <Link to='/AddIncome' > <i className="d-flex justify-content-center fa fa-plus-circle fa-4x fa-center icon-rounded"></i></Link>
@@ -390,7 +399,7 @@ this.setState({monthlyGoal:Goalm[0].target.toLocaleString()})
                             animated
                             striped
                             variant="success"
-                            now={80}
+                            now={`${(this.state.incomes-this.state.expenses)/this.state.yearlyGoal*100}`}
                             key={1}
                             label={` ${(this.state.incomes-this.state.expenses).toLocaleString()}$`}
                           />

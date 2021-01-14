@@ -40,7 +40,7 @@ ReactDOM.render(
           <App />
         </Route>
         <Route path="/">
-          <Register />
+          <Login />
         </Route>
       </Switch>
     </BrowserRouter>

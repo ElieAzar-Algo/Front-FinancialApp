@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom';
 import Logo from  '../assests/Upper.png';
 import {Redirect} from 'react-router-dom';
 import Classes from './menu.module.css';
+//import Toggle from 'react-bootstrap-toggle'
 
 
 class Smenu extends React.Component{
+  
 
   logout = async (e)=>{
     e.preventDefault();
@@ -39,9 +41,13 @@ class Smenu extends React.Component{
             <>
             <div className={Classes.SideMenu} >
               <header className={Classes.Header} >
+              <button className="navbar-toggler" type="button" data-toggle="collapse"  data-target="#Navbar">
+                <span className="navbar-toggler-icon"></span>
+            </button>
               <img  src={Logo}/>
                 <h1>Financial Application</h1>
                 </header>
+                
                   <ul className={Classes.ButtonsContainer}>
                     <li>
                   <Link  to="/about">About</Link>
@@ -61,6 +67,7 @@ class Smenu extends React.Component{
                     <li>
                   <Link to="/categories"><span className="fa fa-category fa-sm"></span>Categories</Link>
                     </li>
+                    
                     <li className={Classes.LogOut} onClick={this.logout}>
                   <Link to='/login'   >Logout</Link>
                 
