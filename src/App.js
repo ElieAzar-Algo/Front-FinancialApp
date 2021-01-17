@@ -7,13 +7,14 @@ import Menu from './menu/menu';
 import AddIncome from './addIncome/addIncome';
 import Test from './home/Test'
 import Report from './report/Report';
+import ExpensesAndIncome from './expensesAndIncomes/ExpensesAndIncome';
 
 
 function App() {
   return (
     <div className="App">
       <header>
-       <Report/>
+        <ExpensesAndIncome/>
       </header>
     </div>
   );

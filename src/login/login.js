@@ -35,8 +35,9 @@ class Login extends React.Component {
     if (result == 200) {
           alert("Login Successfully");
           var accessToken = res.access_token;
+          alert("token: "+accessToken);
+          window.localStorage.setItem("token",accessToken)
           this.setState({ autho: result });
-        window.localStorage.setItem("token",accessToken)
           
             console.log(res);
             

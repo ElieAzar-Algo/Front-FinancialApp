@@ -2,12 +2,17 @@ import React from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import BarChart from './barchart/BarChart';
 import Classes from "./report.module.css";
+import PieChar from './pieCharContainer/pieChar/PieChar';
+import PieChartContainer from './pieCharContainer/PieChartContainer';
 export default class Report extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
+      incomeCategoriesPercentage:[],
+      expenseCategoriesPercentage:[],
+
       chartdata: {
         labels: [],
         datasets: [
@@ -33,7 +38,18 @@ export default class Report extends React.Component {
             ],
             backgroundColor: "rgba(85,47,200,0.6)"
           }
-        ]
+        ],
+        options: {
+          plugins: {
+            datalabels: {
+              display: false
+            },
+            labels:{
+              display: false
+            }
+            }
+          }
+      
       },
       focusedPeriod: "ALL",
       loading: true,
@@ -101,6 +117,7 @@ export default class Report extends React.Component {
       });
 
       let data = await response.json();
+      
       return await data;
     }
     catch (e) {
@@ -119,11 +136,11 @@ export default class Report extends React.Component {
     let chartExpenseData = [];
     let chartProfitData = [];
 
+    let incomeData = null;
+    let expenseData = null;
 
     for (let year = firstYear; year <= lastYear; year++) {
 
-      let incomeData = null;
-      let expenseData = null;
       incomeData = await this.getIncomeData(
         year + "-1-1",
         year + "-12-31"
@@ -146,14 +163,16 @@ export default class Report extends React.Component {
       state.chartdata.datasets[0].data = chartIncomeData;
       state.chartdata.datasets[1].data = chartExpenseData;
       state.chartdata.datasets[2].data = chartProfitData;
+      state.incomeCategoriesPercentage = incomeData.amount_per_category;
+      state.expenseCategoriesPercentage = expenseData.amount_per_category;
 
       state.loading = false;
       return state;
     })
 
-    let arr = [...this.state.dateNavigationTracker];
+/*     let arr = [...this.state.dateNavigationTracker];
     arr.push();
-    this.setState({dateNavigationTracker:arr});65454654654
+    this.setState({dateNavigationTracker:arr}); */
   }
 
   async populateDataMonths(year) {
@@ -198,6 +217,8 @@ export default class Report extends React.Component {
       state.chartdata.datasets[2].data = chartProfitData;
       state.loading = false;
 
+      state.incomeCategoriesPercentage = incomeData.amount_per_category;
+      state.expenseCategoriesPercentage = expenseData.amount_per_category;
       return state;
     })
 
@@ -244,6 +265,9 @@ export default class Report extends React.Component {
       state.chartdata.datasets[0].data = chartIncomeData;
       state.chartdata.datasets[1].data = chartExpenseData;
       state.chartdata.datasets[2].data = chartProfitData;
+
+      state.incomeCategoriesPercentage = incomeData.amount_per_category;
+      state.expenseCategoriesPercentage = expenseData.amount_per_category;
       state.loading = false;
       return state;
     })
@@ -315,6 +339,8 @@ export default class Report extends React.Component {
       state.chartdata.datasets[1].data = chartExpenseData;
       state.chartdata.datasets[2].data = chartProfitData;
       state.loading = false;
+      state.incomeCategoriesPercentage = incomeData.amount_per_category;
+      state.expenseCategoriesPercentage = expenseData.amount_per_category;
       return state;
     })
   }
@@ -361,10 +387,20 @@ export default class Report extends React.Component {
   render() {
     console.log(this.dateNavigationTracker);
     return <>
-      <div className={Classes.ChartContainer}>
-        <BarChart width="50%" data={this.state.chartdata} changePeriodFocus={this.changePeriodFocus.bind(this)} />
+    <div className="container">
+        <BarChart data={this.state.chartdata} changePeriodFocus={this.changePeriodFocus.bind(this)} />
+      <button style={{ marginLeft: "50%" }} onClick={this.goBack.bind(this)}>Back</button>
+      <div className="row">
+        <div className="d-flex flex-column col-md-6 col-xs-12">
+        <h2>Income Per Category</h2>
+            <PieChartContainer data={this.state.incomeCategoriesPercentage}/>
+        </div>        
+        <div className="d-flex flex-column col-md-6 col-xs-12">
+        <h2>Expense Per Category</h2>
+            <PieChartContainer data={this.state.expenseCategoriesPercentage}/>
+        </div>        
       </div>
-      <button style={{ marginLeft: "50%" }} onClick={this.goBack.bind(this)}>Back</button>:
+    </div>
     </>
   }
 }

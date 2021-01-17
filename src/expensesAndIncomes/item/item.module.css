@@ -1,0 +1,60 @@
+.Type{
+    background-color: black;
+    color: white;
+    padding:5px;
+    font-size: 10px;
+    width: 50px;
+    font-weight: 900;
+    text-align: center;
+    border-radius: 5px;
+    display: block;
+}
+
+.TypeContainer{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.DateContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Amount{
+    font-weight: 900;
+    font-size: 30px;
+    color: rgb(59, 59, 59);
+}
+
+.Description {
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.Description p {
+    padding: 0;
+    margin: 0;
+}
+.Active{
+    height: max-content;
+    padding: 10px;
+}
+
+.Header{
+    overflow: hidden;
+    position: relative;
+    background-color: rgb(84, 97, 131);
+    display: flex;
+    align-items: center;
+}
+
+.Container div{
+    box-sizing: border-box;
+    margin: 0 ; 
+    margin-bottom: 2px;
+    width: 100%;
+}
