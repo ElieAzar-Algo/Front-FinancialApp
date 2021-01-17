@@ -14,10 +14,12 @@ import Users from "./users/Users";
 import AddIncome from './addIncome/addIncome';
 import AddExpense from './addExpense/addExpense'
 
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
+      
         
         <Route path="/login">
           <Login />
@@ -27,7 +29,7 @@ ReactDOM.render(
           <AddIncome />
         </Route>
         <Route path="/AddExpense">
-          <AddIncome />
+          <AddExpense/>
         </Route>
         <Route path="/categories">
           <Categories />

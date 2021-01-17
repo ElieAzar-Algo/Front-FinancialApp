@@ -1,18 +1,19 @@
 import React from "react";
-//import "./Users.css";
+//import "./pages/users/Users";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Confirm } from "react-st-modal";
+import Menu from '../menu/menu'
 //import ReactPaginate from "react-js-paginate";
 import { Pagination } from "react-bootstrap";
-class Users extends React.Component {
+export default class Users extends React.Component {
   state = {
     users: [],
-    nextUsers:8,
-    previousUsers:0,
-    activePage:1
+    nextUsers: 8,
+    previousUsers: 0,
+    activePage: 1,
   };
 
   async componentDidMount() {
@@ -27,11 +28,8 @@ class Users extends React.Component {
         Authorization: "Bearer " + token,
       },
     });
-    //console.log(response);
     const result = await response.json();
-   // console.log(result);
     this.setState({ users: result.user });
-   // console.log("hi", this.state.users);
   }
   deleteusers = async (id) => {
     const token = window.localStorage.getItem("token");
@@ -88,40 +86,40 @@ class Users extends React.Component {
   //};
 
   render() {
-    let active = this.state.activePage;
-let items = [];
-for (let number = 1; number <= ((this.state.users.length)/8)+1  ; number++) {
-  items.push(
-    <Pagination.Item key={number} active={number === active}>
-      {number}
-    </Pagination.Item>,
-  );
-}
- const switchPage=(e)=>{
-  console.log(e.target.active)
-   let y=this.state.nextUsers+8;
-   let x=this.state.previousUsers+8
-   //let a=this.state.activePage+1
-   this.setState({previousUsers:x,nextUsers:y})
- }
-    const paginationBasic = (
-     
-      <div>
-        <Pagination onClick={switchPage}>{items}</Pagination>
-      </div>
-    );
-    return ( 
+    const switchPage = (e) => {
+      console.log(e.target.name);
+      let action = e.target.name;
+      if (action === "next" && this.state.nextUsers < this.state.users.length) {
+        let y = this.state.nextUsers + 8;
+        let x = this.state.previousUsers + 8;
+        this.setState({ previousUsers: x, nextUsers: y });
+      } else if (action === "previous" && this.state.previousUsers > 0) {
+        let y = this.state.nextUsers - 8;
+        let x = this.state.previousUsers - 8;
+        this.setState({ previousUsers: x, nextUsers: y });
+      }
+    };
+
+    return (
 
 
-      
-      <div class="container">
-        <div class="card">
-          <div class="card-header" style={{ textAlign: "center" }}>
-            All Admins
+
+      <div className="usersContainer" style={{height:'100vh',width:'100vw'}}>
+        <div className="row">
+          <div className="col-3 ">
+            <Menu/>
+
           </div>
-          
 
-          <div class="card-body">
+      <div className=" col-9">
+      <div style={{  height: "90vh", width: "90%" }}
+      >
+        <div className=" card">
+          <div className="card-header" style={{ textAlign: "center" }}>
+            <h2>Admins</h2>
+          </div>
+
+          <div className="card-body">
             <div className="to">
               <div className="tb">
                 <form onSubmit={this.createusers}>
@@ -129,88 +127,71 @@ for (let number = 1; number <= ((this.state.users.length)/8)+1  ; number++) {
                     style={{ margin: "10px" }}
                     type="text"
                     name="name"
-                    placeholder="insert name"
+                    placeholder=" Name"
                   ></input>
                   <input
                     style={{ margin: "10px" }}
                     type="text"
                     name="email"
-                    placeholder="insert email"
+                    placeholder=" Email"
                   ></input>
 
                   <input
                     style={{ margin: "10px" }}
                     type="text"
                     name="password"
-                    placeholder="insert password"
+                    placeholder=" Password"
                   />
                   <input
                     type="submit"
                     name="add"
                     placeholder="add user"
-                    class="btn btn-primary btn-sm"
+                    className="btn btn-primary btn-sm"
+                    style={{ color: "white" }}
                   />
                 </form>
               </div>
               <div className="content-table">
-                <table class="table table-hover">
+                <table className="table table-hover">
                   <thead>
                     <tr>{/* <th>name</th> */}</tr>
                   </thead>
 
                   <tbody>
-                    {this.state.users.slice(this.state.previousUsers,this.state.nextUsers).map((users, index) => (
-                      <tr key={index}>
-                        {/* <td> {users.id}</td> */}
-                        <td>{users.name}</td>
-                        <td>{users.email}</td>
+                    {this.state.users
+                      .slice(this.state.previousUsers, this.state.nextUsers)
+                      .map((users, index) => (
+                        <tr key={index}>
+                          {/* <td> {users.id}</td> */}
+                          <td>{users.name}</td>
+                          <td>{users.email}</td>
 
-                        <td>
-                          <div>
+                          <td>
                             <FontAwesomeIcon
                               icon={faTrash}
                               onClick={async () => {
                                 const isConfirm = await Confirm(
-                                  "You cannot undo this action",
-                                  "Are you sure you want to delete the Category?"
+                                  "Are you sure you want to delete the User?",
+                                  "You cannot undo this action"
                                 );
                                 if (isConfirm) {
                                   this.deleteusers(users.id);
                                 }
                               }}
                             />
-                          </div>
-                        </td>
-                        {/* <td>
-                          <div>
-                            <pageNumber
-                              active
-                              age={Current - page}
-                              TotalItemsCount={total}
-                              itemscount
-                              per
-                              Page={per - page}
-                              onchange={(pageNumber) =>
-                                this.componentDidMount(pageNumber)
-                              }
-                              item
-                              class="page-link"
-                              link
-                              class="page-link"
-                              first
-                              Page
-                              Text="first"
-                              last
-                              Page
-                              Text="last"
-                            ></pageNumber>
-                          </div>
-                        </td> */}
-                      </tr>
-                    ))}
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
-                  <div style={{marginLeft:"120%"}}>
-                  {paginationBasic}
+                  <div style={{ marginLeft: "100%" }}>
+                    <Pagination onClick={switchPage}>
+                      <Pagination.Item name="previous" value="previous">
+                        previous
+                      </Pagination.Item>
+                      <Pagination.Item name="next" value="next">
+                        next
+                      </Pagination.Item>
+                    </Pagination>
                   </div>
                 </table>
               </div>
@@ -218,8 +199,9 @@ for (let number = 1; number <= ((this.state.users.length)/8)+1  ; number++) {
           </div>
         </div>
       </div>
+      </div>
+      </div>
+      </div>
     );
   }
 }
-
-export default Users;

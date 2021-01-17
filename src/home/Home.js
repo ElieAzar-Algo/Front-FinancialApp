@@ -5,7 +5,7 @@ import Menu from '../menu/menu.js';
 import {ProgressBar} from "react-bootstrap";
 import {Link, Redirect} from 'react-router-dom'
 
-
+const token= window.localStorage.getItem("token");  
 class Home extends React.Component{
 
   state={
@@ -24,12 +24,12 @@ class Home extends React.Component{
 
   async componentDidMount(){
 
-
+    const token= await window.localStorage.getItem("token");
 //----------------------------------------------------------------------------------------//
 //                                fetch Incomes                                           //
 //----------------------------------------------------------------------------------------//
-    const incomesurl = "http://localhost:8000/api/report/income?startdate=2000-2-14&enddate=2100-2-20";
-   const token= window.localStorage.getItem("token")
+    const incomesurl =  "http://localhost:8000/api/report/income?startdate=2000-2-14&enddate=2100-2-20";
+   
    //console.log(token)
 
     const incomesResponse = await fetch(incomesurl, {
@@ -140,6 +140,7 @@ this.setState({monthlyGoal:Goalm[0].target.toLocaleString()})
       if (!this.state.incomesCategories|| !this.state.expensesCategories ||!this.state.allIncomes){
        return( <Redirect to="/login"/>)
       }
+      const userName=window.localStorage.getItem("user_id")
       const incObj = this.state.incomesCategories
       //console.log(incObj);
       let maxCategoryInc = "";
@@ -171,10 +172,13 @@ this.setState({monthlyGoal:Goalm[0].target.toLocaleString()})
               <div className="col-3">
                 <Menu />
               </div>
-              <div className="col-9 home-middle-container" style={{}}>
+              <div className="col-9 home-middle-container" style={{marginLeft:"22%"}}>
                 <div className=" row" style={{padding:"0px", marginTop:"2%"}}>
                   <div className="col-11 jumbotron" style={{padding:"1%"}}>
                   <i className="fa fa-user-circle fa-3x pull-right"></i>
+                  
+                    <h3 className="float-right " style={{marginTop:"1%"}} > {userName}  </h3>
+                    
                   </div>
 
                 </div>

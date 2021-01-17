@@ -34,13 +34,13 @@ class Login extends React.Component {
     const result = await response.status;
     
     if (result == 200) {
-          alert("Login Successfully");
-          var accessToken = res.access_token;
-          this.setState({ autho: result });
-        window.localStorage.setItem("token",accessToken)
-          
-            console.log(res);
-            
+      var accessToken = res.access_token;
+      var userId=res.user.name
+      window.localStorage.setItem("token",accessToken)
+      window.localStorage.setItem("user_id",userId)
+      alert("Login Successfully");
+      this.setState({ autho: result });
+       console.log(res);
     } 
     else {
       alert("Login Failed");
@@ -68,12 +68,12 @@ class Login extends React.Component {
             <h5 className="card-title text-center">Sign In</h5>
             <form className="form-signin" onSubmit={this.loginCheck} method="post">
               <div className="form-label-group">
-                <input type="email" name="adminEmail" id="inputEmail" className="form-control" placeholder="Email address" required autoFocus/>
+                <input type="email" name="adminEmail" id="inputEmail" className="form-control" placeholder="Email address" autoComplete="adminEmail" required autoFocus/>
                 <label htmlFor="inputEmail">Email address</label>
               </div>
 
               <div className="form-label-group">
-                <input type="password" name="adminPassword" id="inputPassword" className="form-control" placeholder="Password" required/>
+                <input type="password" name="adminPassword" id="inputPassword" className="form-control" placeholder="Password" required autoComplete="current-password"/>
                 <label htmlFor="inputPassword">Password</label>
               </div>
 
