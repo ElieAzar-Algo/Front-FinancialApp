@@ -173,11 +173,10 @@ class AddIncome extends React.Component{
             <div style={{overFlowX:"hidden"}}>
 
               <div className="row row-content">
-                <div className="col">
-                  <Menu/>
-                </div>
-
-                  <div className="col-9">
+              <div className="col-3" style={{width:"20%",height:"100vh", display:"flex",position:"fixed"}}>
+                <Menu  />
+              </div>
+              <div className="col-9 home-middle-container" style={{marginLeft:"20%"}}>
                 <div className=" jumbotron col-11" style={{marginTop:"2%",padding:"1%"}}>
                   <h2> <i className="fa fa-line-chart" aria-hidden="true" style={{paddingRight:"2%"}}></i> <srtong> Add New Income </srtong></h2>
                 </div>

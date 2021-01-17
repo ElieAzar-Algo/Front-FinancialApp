@@ -169,10 +169,10 @@ this.setState({monthlyGoal:Goalm[0].target.toLocaleString()})
         return (
           <>
             <div className="row home-content">
-              <div className="col-3">
-                <Menu />
+              <div className="col-3" style={{width:"20%",height:"100vh", display:"flex",position:"fixed"}}>
+                <Menu  />
               </div>
-              <div className="col-9 home-middle-container" style={{marginLeft:"22%"}}>
+              <div className="col-9 home-middle-container" style={{marginLeft:"20%"}}>
                 <div className=" row" style={{padding:"0px", marginTop:"2%"}}>
                   <div className="col-11 jumbotron" style={{padding:"1%"}}>
                   <i className="fa fa-user-circle fa-3x pull-right"></i>

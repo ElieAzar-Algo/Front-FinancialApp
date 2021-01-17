@@ -106,12 +106,10 @@ export default class Users extends React.Component {
 
       <div className="usersContainer" style={{height:'100vh',width:'100vw'}}>
         <div className="row">
-          <div className="col-3 ">
-            <Menu/>
-
-          </div>
-
-      <div className=" col-9">
+        <div className="col-3" style={{width:"20%",height:"100vh", display:"flex",position:"fixed"}}>
+                <Menu  />
+              </div>
+              <div className="col-9 home-middle-container" style={{marginLeft:"20%"}}>
       <div style={{  height: "90vh", width: "90%" }}
       >
         <div className=" card">
