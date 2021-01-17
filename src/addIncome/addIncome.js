@@ -178,8 +178,8 @@ class AddIncome extends React.Component{
                 </div>
 
                   <div className="col-9">
-                <div className="col-12">
-                  <h2> <i className="fa fa-line-chart" aria-hidden="true" style={{paddingRight:"2%"}}></i> <srtong> Add Income </srtong></h2>
+                <div className=" jumbotron col-11" style={{marginTop:"2%",padding:"1%"}}>
+                  <h2> <i className="fa fa-line-chart" aria-hidden="true" style={{paddingRight:"2%"}}></i> <srtong> Add New Income </srtong></h2>
                 </div>
               
               <form  method="POST" onSubmit={this.createIncome} action="#" >

@@ -173,8 +173,8 @@ class AddExpense extends React.Component{
                 </div>
 
                   <div className="col-9">
-                <div className="col-12">
-                  <h2> <i className="fa fa-line-chart" aria-hidden="true" style={{paddingRight:"2%"}}></i> Add Expense </h2>
+                <div className=" jumbotron col-11" style={{marginTop:"2%",padding:"1%"}}>
+                  <h2> <i className="fa fa-line-chart" aria-hidden="true" style={{paddingRight:"2%"}}></i> Add New Expense </h2>
                 </div>
               
               <form  method="POST" onSubmit={this.createExpense} >

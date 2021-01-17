@@ -1,21 +1,26 @@
 import React from "react";
-import "./Categories.css";
-//import * as FaIcons from "react-icons/fa";
+//import "./Categories.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+//import Pagination from "react-pagination";
+//import ReactPaginate from "react-paginate";
+import Menu from '../menu/menu'
 import { Link } from "react-router-dom";
-// * as AiIcons from "react-icons/ai";
-//import * as IoIcons from "react-icons/io";
-//import Editcategories from "./Editcategories";
-//import Axios from "./";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Confirm } from "react-st-modal";
 
 export default class Categories extends React.Component {
+  constructor(props) {
+    super(props);
+    ///this.myUpdate = React.createRef();
+  }
   state = {
     categories: [],
-    role: "",
+    updateinput: "",
   };
 
   async componentDidMount() {
+    // console.log(this.myUpdate.current.style);
     const url = "http://localhost:8000/api/category";
     const token = window.localStorage.getItem("token");
 
@@ -27,12 +32,16 @@ export default class Categories extends React.Component {
         Authorization: "Bearer " + token,
       },
     });
-    //console.log(response);
     const result = await response.json();
     console.log(result);
     this.setState({ categories: result.categories.data });
     console.log("hi", this.state.categories);
   }
+  handleInputChange = (e) => {
+    e.preventDefault();
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   deletecategories = async (id) => {
     const token = window.localStorage.getItem("token");
     const requestOptions = {
@@ -83,70 +92,154 @@ export default class Categories extends React.Component {
     this.componentDidMount();
     //this.componentDidUpdate();
   };
-  //};
+
+  updatecategories = async (id) => {
+    const token = window.localStorage.getItem("token");
+    const name = this.state.updateinput;
+    console.log(name);
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({
+        name: name,
+      }),
+    };
+    console.log(name);
+    const url = `http://localhost:8000/api/category/${id}`;
+    const response = await fetch(url, requestOptions);
+    const result = await response.json();
+    console.log(result);
+
+    //this.setState({ role: "" });
+    this.componentDidMount();
+    //this.componentDidUpdate();
+  };
+  // Switch = async (e) => {
+  //   const val = e.target.value;
+  //   console.log(val);
+  //   console.log(this.myUpdate.current.style);
+  //   this.myUpdate.current.style.display = "block";
+  // };
 
   render() {
+    // this.myUpdate.current.value;
     return (
-      <div className="tbl">
-        <FontAwesomeIcon icon={faTrash} />
-        <form onSubmit={this.createcategories}>
-          <input type="text" name="name" placeholder="insert name"></input>
-          <input type="submit" name="add" placeholder="add categories"></input>
-        </form>
 
-        <div className="tbl-header">
-          <table cellPadding="0" cellSpacing="0" border="0">
-            <thead>
-              <tr>
-                <th>name</th>
-              </tr>
-            </thead>
-          </table>
-        </div>
-        <div className="tbl-content">
-          <table cellPadding="0" cellSpacing="0" border="0">
-            <tbody>
-              {this.state.categories.map((category, index) => (
-                <tr key={index}>
-                  <td> {category.id}</td>
-                  <td>{category.name}</td>
-
-                  <td>
-                    <div>
-                      {/* {/* <Link
-                        to={{
-                          pathname: `/category/edit/${category.id} `,
-                          state: { category },
-                        }}
-                      >
-                        {/* <FaIcons.FaEdit />
-                      </Link> */}
-
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        onClick={() => this.deletecategories(category.id)}
-                      />
-                    </div>
-                  </td>
+      <div className="usersContainer">
+        <div className="row"> 
+        <div className="col-3">
+<Menu/>
+        </div> 
+      <div className="col-9">
+      <div style={{ width: "90%",marginTop:"5%"}}>
+        <div className="card">
+          <div className="card-header" style={{ textAlign: "center" }}>
+            <h2> Categories</h2>
+          </div>
+          <div className="card-body"></div>
+          <div className="tb">
+            <form onSubmit={this.createcategories}>
+              <input
+                style={{ margin: "10px" }}
+                type="text"
+                name="name"
+                placeholder=" Name"
+                // onChange={this.handleInputChange}
+                // defaultValue={this.state.categories.name}
+              ></input>
+              <input
+                style={{ margin: "10px" }}
+                type="submit"
+                name="add"
+                placeholder="add categories"
+                className="te"
+              ></input>
+            </form>
+          </div>
+          <div className="content-table">
+            {/* <div className="tbl-header"> */}
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  {/* <th>ID</th>
+                <th>Name</th>
+                <th>controller</th> */}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody></tbody>
+              <tbody>
+                {this.state.categories.map((category, index) => (
+                  <tr key={index}>
+                    {/* <td> {category.id}</td> */}
+                    <td>{category.name}</td>
+
+                    <td>
+                      <div>
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          onClick={async () => {
+                            const isConfirm = await Confirm(
+                              "Are you sure you want to delete the Category?",
+                              "You cannot undo this action"
+                            );
+                            if (isConfirm) {
+                              this.deletecategories(category.id);
+                            }
+                          }}
+                        />
+                      </div>
+                    </td>
+                    <td>
+                      <div>
+                        <FontAwesomeIcon
+                          // onClick={this.Switch}
+                          // value="1"
+                          icon={faEdit}
+                          onClick={async () => {
+                            const isConfirm = await Confirm(
+                              <input
+                                id="title"
+                                type="text"
+                                placeholder="New Title"
+                                name="updateinput"
+                                onChange={this.handleInputChange}
+                                value={this.state.iupdateinput}
+                              />
+                            );
+                            if (isConfirm) {
+                              this.updatecategories(category.id);
+                            }
+                          }}
+                        />
+                        {/* <div
+                          className="inputx"
+                          //style={{ display: "none" }}
+                          //ref={this.myUpdate}
+                        > */}
+
+                        {/* <button
+                            onClick={() => this.updatecategories(category.id)}
+                          >
+                            Update
+                          </button> */}
+                      </div>
+                      {/* </div> */}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {/* </div> */}
+          </div>
         </div>
+        </div>
+      </div>
+      </div>
       </div>
     );
   }
-}
-
-{
-  /* <FaIcons.FaEdit />
-                      </Link> */
-}
-{
-  /* <Link className="icon"> */
-}
-{
-  /* <FaIcons.FaMinusCircle
-                          onClick={() => this.deletecategories(categories.id)}
-                        /> */
 }

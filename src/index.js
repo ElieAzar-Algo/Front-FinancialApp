@@ -11,16 +11,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Categories from "./categories/Categories";
 import Usermanagement from "./users/Users";
 import Users from "./users/Users";
+import AddIncome from './addIncome/addIncome';
+import AddExpense from './addExpense/addExpense'
+
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
+      
         
         <Route path="/login">
           <Login />
         </Route>
 
+        <Route path="/AddIncome">
+          <AddIncome />
+        </Route>
+        <Route path="/AddExpense">
+          <AddExpense/>
+        </Route>
         <Route path="/categories">
           <Categories />
         </Route>
@@ -32,7 +42,7 @@ ReactDOM.render(
           <App />
         </Route>
         <Route path="/">
-          <Register />
+          <Login />
         </Route>
       </Switch>
     </BrowserRouter>
