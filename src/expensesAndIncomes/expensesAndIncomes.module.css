@@ -1,0 +1,109 @@
+.List{
+    padding: 0;
+    margin: 0;
+}
+
+.List li{
+    list-style: none;
+}
+
+.FilterBar{
+    background-color: rgb(38, 37, 43);
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    color: white;
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+}
+
+.FilterBar input{
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    width: 150px;
+    padding: 10px;
+    margin: 0;
+    padding-right: 10px;
+}
+
+.FilterBar h2{
+    margin: 0;
+}
+
+.DateFilterContainer i{
+   
+    background-color: white;
+    padding: 14px;
+    padding-right: 10px;
+    margin: 0;
+    margin-bottom: -1px;
+    color: black;
+}
+
+.FilterBar label{
+    margin-right: 5px;
+}
+
+.DateFilterContainer{
+
+    display: flex;
+    align-items: center;
+}
+
+.SortingContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.SortingContainer h2{
+    margin-right: 15px;
+}
+
+.SortingContainer button{
+    background-color: white;
+    padding:10px;
+    margin-right: 15px;
+    border: none;
+
+}
+
+.SortingContainer i{
+    margin-right: 5px;
+}
+
+.SortingContainer button:hover{
+    background-color: rgb(209, 209, 209);
+}
+
+.CategoryCheckBoxContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.CategoryCheckBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.CategoryCheckBox label{
+    margin: 0;
+    margin-right: 5px;
+}
+
+.CategoryCheckBox input{
+    width: 10px;
+}
+
+
+.SortingAndRecuringTypeContainer{
+  
+}
+
+.ExpensesAndIncomeListsContainer{
+    margin-top: 25px;
+}

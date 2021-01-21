@@ -1,0 +1,30 @@
+.action-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+.action-cell div{
+    width: 30px;
+}
+
+.action-edit{
+    color: royalblue;
+    cursor: pointer;
+}
+
+.action-delete{
+    color:var(--accent);
+    cursor: pointer;
+}
+
+.usersContainer{
+    margin-top:25px;
+}
+
+.trash-button{
+}
+
+.add-new-user-form{
+    margin-bottom: 15px !important;
+}

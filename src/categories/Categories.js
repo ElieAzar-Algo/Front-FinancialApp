@@ -1,5 +1,5 @@
 import React from "react";
-//import "./Categories.css";
+import "./Categories.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import Pagination from "react-pagination";
 //import ReactPaginate from "react-paginate";
@@ -128,74 +128,58 @@ export default class Categories extends React.Component {
   render() {
     // this.myUpdate.current.value;
     return (
+      <>
 
-      <div className="usersContainer">
-        <div className="row"> 
-        <div className="col-3" style={{width:"20%",height:"100vh", display:"flex",position:"fixed"}}>
-                <Menu  />
-              </div>
-              <div className="col-9 home-middle-container" style={{marginLeft:"20%"}}>
-      <div style={{ width: "90%",marginTop:"5%"}}>
-        <div className="card">
-          <div className="card-header" style={{ textAlign: "center" }}>
-            <h2> Categories</h2>
-          </div>
-          <div className="card-body"></div>
-          <div className="tb">
-            <form onSubmit={this.createcategories}>
-              <input
-                style={{ margin: "10px" }}
-                type="text"
-                name="name"
-                placeholder=" Name"
-                // onChange={this.handleInputChange}
-                // defaultValue={this.state.categories.name}
-              ></input>
-              <input
-                style={{ margin: "10px" }}
-                type="submit"
-                name="add"
-                placeholder="add categories"
-                className="te"
-              ></input>
-            </form>
-          </div>
-          <div className="content-table">
-            {/* <div className="tbl-header"> */}
-            <table className="table table-hover">
-              <thead>
-                <tr>
-                  {/* <th>ID</th>
-                <th>Name</th>
-                <th>controller</th> */}
-                </tr>
-              </thead>
-              <tbody></tbody>
-              <tbody>
-                {this.state.categories.map((category, index) => (
-                  <tr key={index}>
-                    {/* <td> {category.id}</td> */}
-                    <td>{category.name}</td>
+<div className="usersContainer">
+        <div>
+          <div className="card">
+            <div className="card-body">
+              <div className="to">
+                <div className="tb">
+                  <form className="add-new-user-form" onSubmit={this.createcategories}>
+                    <input
+                      style={{ margin: "10px" }}
+                      type="text"
+                      name="name"
+                      placeholder="Category Name"
+                    ></input>
+                    <input
+                      type="submit"
+                      name="add"
+                      placeholder="add user"
+                      className="btn btn-primary btn-sm"
+                      style={{ color: "white" }}
+                    />
+                  </form>
+                </div>
+                <div className="content-table">
+                  <table className="table table-hover">
+                    <thead>
+                      <tr>{/* <th>name</th> */}</tr>
+                    </thead>
 
-                    <td>
-                      <div>
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          onClick={async () => {
-                            const isConfirm = await Confirm(
-                              "Are you sure you want to delete the Category?",
-                              "You cannot undo this action"
-                            );
-                            if (isConfirm) {
-                              this.deletecategories(category.id);
-                            }
-                          }}
-                        />
-                      </div>
-                    </td>
-                    <td>
-                      <div>
-                        <FontAwesomeIcon
+                    <tbody>
+                      {this.state.categories.map((category, index) => (
+                          <tr key={index}>
+                             <td>{category.name}</td>
+
+                            <td className="action-cell">
+                              <div className="action-delete">
+                              <FontAwesomeIcon
+                                icon={faTrash}
+                                onClick={async () => {
+                                  const isConfirm =  await Confirm(
+                                    "Are you sure you want to delete the Category?",
+                                    "You cannot undo this action"
+                                  );
+                                  if (isConfirm) {
+                                    this.deletecategories(category.id);
+                                  }
+                                }}
+                              />
+                              </div>
+                              <div className="action-edit">
+                              <FontAwesomeIcon
                           // onClick={this.Switch}
                           // value="1"
                           icon={faEdit}
@@ -215,31 +199,33 @@ export default class Categories extends React.Component {
                             }
                           }}
                         />
-                        {/* <div
-                          className="inputx"
-                          //style={{ display: "none" }}
-                          //ref={this.myUpdate}
-                        > */}
-
-                        {/* <button
-                            onClick={() => this.updatecategories(category.id)}
-                          >
-                            Update
-                          </button> */}
-                      </div>
-                      {/* </div> */}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {/* </div> */}
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  {/*   <div style={{ marginLeft: "100%" }}>
+                      <Pagination onClick={switchPage}>
+                        <Pagination.Item name="previous" value="previous">
+                          previous
+                      </Pagination.Item>
+                        <Pagination.Item name="next" value="next">
+                          next
+                      </Pagination.Item>
+                      </Pagination>
+                    </div> */}
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        </div>
+
       </div>
-      </div>
-      </div>
+
+
+
+      </>
     );
   }
 }

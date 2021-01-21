@@ -6,6 +6,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Confirm } from "react-st-modal";
 import Menu from '../menu/menu'
+import "./Users.css";
 //import ReactPaginate from "react-js-paginate";
 import { Pagination } from "react-bootstrap";
 export default class Users extends React.Component {
@@ -101,105 +102,92 @@ export default class Users extends React.Component {
     };
 
     return (
+      <div className="usersContainer">
+        <div>
+          <div className="card">
+            <div className="card-body">
+              <div className="to">
+                <div className="tb">
+                  <form className="add-new-user-form" onSubmit={this.createusers}>
+                    <input
+                      style={{ margin: "10px" }}
+                      type="text"
+                      name="name"
+                      placeholder=" Name"
+                    ></input>
+                    <input
+                      style={{ margin: "10px" }}
+                      type="text"
+                      name="email"
+                      placeholder=" Email"
+                    ></input>
 
+                    <input
+                      style={{ margin: "10px" }}
+                      type="text"
+                      name="password"
+                      placeholder=" Password"
+                    />
+                    <input
+                      type="submit"
+                      name="add"
+                      placeholder="add user"
+                      className="btn btn-primary btn-sm"
+                      style={{ color: "white" }}
+                    />
+                  </form>
+                </div>
+                <div className="content-table">
+                  <table className="table table-hover">
+                    <thead>
+                      <tr>{/* <th>name</th> */}</tr>
+                    </thead>
 
+                    <tbody>
+                      {this.state.users
+                        .slice(this.state.previousUsers, this.state.nextUsers)
+                        .map((users, index) => (
+                          <tr key={index}>
+                            {/* <td> {users.id}</td> */}
+                            <td>{users.name}</td>
+                            <td>{users.email}</td>
 
-      <div className="usersContainer" style={{height:'100vh',width:'100vw'}}>
-        <div className="row">
-        <div className="col-3" style={{width:"20%",height:"100vh", display:"flex",position:"fixed"}}>
-                <Menu  />
-              </div>
-              <div className="col-9 home-middle-container" style={{marginLeft:"20%"}}>
-      <div style={{  height: "90vh", width: "90%" }}
-      >
-        <div className=" card">
-          <div className="card-header" style={{ textAlign: "center" }}>
-            <h2>Admins</h2>
-          </div>
-
-          <div className="card-body">
-            <div className="to">
-              <div className="tb">
-                <form onSubmit={this.createusers}>
-                  <input
-                    style={{ margin: "10px" }}
-                    type="text"
-                    name="name"
-                    placeholder=" Name"
-                  ></input>
-                  <input
-                    style={{ margin: "10px" }}
-                    type="text"
-                    name="email"
-                    placeholder=" Email"
-                  ></input>
-
-                  <input
-                    style={{ margin: "10px" }}
-                    type="text"
-                    name="password"
-                    placeholder=" Password"
-                  />
-                  <input
-                    type="submit"
-                    name="add"
-                    placeholder="add user"
-                    className="btn btn-primary btn-sm"
-                    style={{ color: "white" }}
-                  />
-                </form>
-              </div>
-              <div className="content-table">
-                <table className="table table-hover">
-                  <thead>
-                    <tr>{/* <th>name</th> */}</tr>
-                  </thead>
-
-                  <tbody>
-                    {this.state.users
-                      .slice(this.state.previousUsers, this.state.nextUsers)
-                      .map((users, index) => (
-                        <tr key={index}>
-                          {/* <td> {users.id}</td> */}
-                          <td>{users.name}</td>
-                          <td>{users.email}</td>
-
-                          <td>
-                            <FontAwesomeIcon
-                              icon={faTrash}
-                              onClick={async () => {
-                                const isConfirm = await Confirm(
-                                  "Are you sure you want to delete the User?",
-                                  "You cannot undo this action"
-                                );
-                                if (isConfirm) {
-                                  this.deleteusers(users.id);
-                                }
-                              }}
-                            />
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                  <div style={{ marginLeft: "100%" }}>
-                    <Pagination onClick={switchPage}>
-                      <Pagination.Item name="previous" value="previous">
-                        previous
+                            <td className="trash-button">
+                              <FontAwesomeIcon
+                                icon={faTrash}
+                                onClick={async () => {
+                                  const isConfirm = await Confirm(
+                                    "Are you sure you want to delete the User?",
+                                    "You cannot undo this action"
+                                  );
+                                  if (isConfirm) {
+                                    this.deleteusers(users.id);
+                                  }
+                                }}
+                              />
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                    <div style={{ marginLeft: "100%" }}>
+                      <Pagination onClick={switchPage}>
+                        <Pagination.Item name="previous" value="previous">
+                          previous
                       </Pagination.Item>
-                      <Pagination.Item name="next" value="next">
-                        next
+                        <Pagination.Item name="next" value="next">
+                          next
                       </Pagination.Item>
-                    </Pagination>
-                  </div>
-                </table>
+                      </Pagination>
+                    </div>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
-      </div>
-      </div>
-      </div>
+
     );
   }
 }

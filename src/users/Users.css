@@ -1,0 +1,12 @@
+.usersContainer{
+    margin-top:25px;
+}
+
+.trash-button{
+    color:var(--accent);
+    cursor: pointer;
+}
+
+.add-new-user-form{
+    margin-bottom: 15px !important;
+}

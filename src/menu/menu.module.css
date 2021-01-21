@@ -14,12 +14,13 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    height:100%;
+    
     padding: 15px 20px;
 }
 
 .Header h1{
-    font-size: 25px;
+    margin: 0;
+    font-size: 20px;
     font-weight: 900;
     color: white;
 }
@@ -28,6 +29,16 @@
     width: 20%;
     margin-right: 10px;
 
+}
+.MobileMenuButton{
+    margin-right: 15px;
+background-color: transparent;
+box-shadow: 0px;
+border: 0;
+padding: 0;
+}
+.MobileMenuButton > i{
+    color: white;
 }
 
 .ButtonsContainer{
@@ -62,4 +73,9 @@
     text-align: center;
 }
 
+
+.Wrapper > div{
+   width: 100% !important;
+   height: 100vh;
+}
 

@@ -7,6 +7,25 @@
     background-color: rgb(214, 212, 212);
 }
 
+.goal-target{
+    margin-top: 30px;
+}
+
+.highest{
+    margin:  0;
+}
+
+.highest-item{
+    margin-top: 25px;
+}
+
+.add-records{
+    margin-top: 25px;
+}
+
+.summary{
+    margin-top: 25px;
+}
 .card {
     background-color: #fff;
     border-radius: 10px;
