@@ -120,7 +120,6 @@ export default class Report extends React.Component {
       });
 
       let data = await response.json();
-
       return await data;
     }
     catch (e) {

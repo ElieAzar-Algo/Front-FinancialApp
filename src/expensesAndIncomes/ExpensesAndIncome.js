@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import Item from './item/Item'
 import classes from './expensesAndIncomes.module.css';
+<<<<<<< HEAD
 import Menu from "../menu/menu";
 
+=======
+import ReactPaginate from 'react-paginate';
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
 
 export default class ExpensesAndIncome extends Component {
 
@@ -15,12 +19,21 @@ export default class ExpensesAndIncome extends Component {
       incomeSum: 0,
       lastIncomeSelected: 0,
       lastExpenseSelected: 0,
+<<<<<<< HEAD
       typesVisibility: {}
     }
     this.transectionReccuringType = {};
     this.fromDate = React.createRef();
     this.toDate = React.createRef();
     this.fromDateString = null;
+=======
+      typesVisibility:{}
+    }
+    this.transectionReccuringType={};
+    this.fromDate = React.createRef();
+    this.toDate = React.createRef();
+    this.fromDateString=null;
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
     this.toDateString = null;
     this.sortDateAsc = true;
     this.sortAmountAsc = true;
@@ -28,7 +41,11 @@ export default class ExpensesAndIncome extends Component {
   }
 
   componentDidMount() {
+<<<<<<< HEAD
     this.setPeriod(this.fromDateString, this.toDateString);
+=======
+   this.setPeriod(this.fromDateString,this.toDateString); 
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -37,6 +54,7 @@ export default class ExpensesAndIncome extends Component {
     return false;
   }
 
+<<<<<<< HEAD
   async setPeriod(from, to) {
     this.transectionReccuringType = {};
     let incomesData = await this.getIncomeData(from, to);
@@ -64,11 +82,41 @@ export default class ExpensesAndIncome extends Component {
   }
 
   sortDate() {
+=======
+  async setPeriod(from,to){
+    this.transectionReccuringType = {};
+    let incomesData = await this.getIncomeData(from,to);
+    let expensesData = await this.getExpenseData(from,to);
+     
+    incomesData.list.sort(
+      (a,b)=>{
+        return (a.date+"" > b.date+"")?1:-1;
+      }
+    );
+           
+    expensesData.list.sort(
+      (a,b)=>{
+        return (a.date+"" > b.date+"")?1:-1;
+      }
+    );
+    
+    let types = {};
+
+    Object.keys(this.transectionReccuringType).map(e=>{
+      types[e] = true
+    });
+
+    this.setState({ typesVisibility:types, incomes: incomesData.list, pageCount: incomesData.list.length, expenses: expensesData.list, expenseSum: expensesData.sum, incomeSum: incomesData.sum });
+  }
+
+  sortDate(){
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
     this.sortDateAsc = !this.sortDateAsc;
 
     let incomesData = [...this.state.incomes];
     let expensesData = [...this.state.expenses];
     incomesData.sort(
+<<<<<<< HEAD
       (a, b) => {
         //console.log();
         if (this.sortDateAsc) return (a.date + "" > b.date + "") ? 1 : -1;
@@ -86,11 +134,31 @@ export default class ExpensesAndIncome extends Component {
   }
 
   sortAmount() {
+=======
+      (a,b)=>{
+        //console.log();
+        if(this.sortDateAsc)  return (a.date+"" > b.date+"")?1:-1;
+        if(!this.sortDateAsc)  return (a.date+"" > b.date+"")?-1:1;
+      }
+    ); 
+    expensesData.sort(
+      (a,b)=>{
+        //console.log();
+        if(this.sortDateAsc)  return (a.date+"" > b.date+"")?1:-1;
+        if(!this.sortDateAsc)  return (a.date+"" > b.date+"")?-1:1;
+      }
+    ); 
+    this.setState({ incomes: incomesData, expenses: expensesData});
+  }
+
+  sortAmount(){
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
     this.sortAmountAsc = !this.sortAmountAsc;
 
     let incomesData = [...this.state.incomes];
     let expensesData = [...this.state.expenses];
     incomesData.sort(
+<<<<<<< HEAD
       (a, b) => {
         //console.log();
         if (this.sortAmountAsc) return (a.amount > b.amount) ? 1 : -1;
@@ -108,11 +176,31 @@ export default class ExpensesAndIncome extends Component {
   }
 
   sortTransectionType() {
+=======
+      (a,b)=>{
+        //console.log();
+        if(this.sortAmountAsc)  return (a.amount > b.amount)?1:-1;
+        if(!this.sortAmountAsc)  return (a.amount > b.amount)?-1:1;
+      }
+    ); 
+    expensesData.sort(
+      (a,b)=>{
+        //console.log();
+        if(this.sortAmountAsc)  return (a.amount > b.amount)?1:-1;
+        if(!this.sortAmountAsc)  return (a.amount > b.amount)?-1:1;
+      }
+    ); 
+    this.setState({ incomes: incomesData, expenses: expensesData});
+  }
+
+  sortTransectionType(){
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
     this.sortFixedTop = !this.sortFixedTop;
 
     let incomesData = [...this.state.incomes];
     let expensesData = [...this.state.expenses];
     incomesData.sort(
+<<<<<<< HEAD
       (a, b) => {
         //console.log();
         if (this.sortAmountAsc) return (a.type == "fixed") ? 1 : -1;
@@ -130,16 +218,43 @@ export default class ExpensesAndIncome extends Component {
   }
 
   async getIncomeData(_from, _to) {
+=======
+      (a,b)=>{
+        //console.log();
+        if(this.sortAmountAsc)  return (a.type == "fixed")?1:-1;
+        if(!this.sortAmountAsc) return (a.type == "fixed")?-1:1;
+      }
+    ); 
+    expensesData.sort(
+      (a,b)=>{
+        //console.log();
+        if(this.sortAmountAsc)  return (a.type == "fixed")?1:-1;
+        if(!this.sortAmountAsc) return (a.type == "fixed")?-1:1;
+      }
+    ); 
+    this.setState({ incomes: incomesData, expenses: expensesData});
+  }
+
+  async getIncomeData(_from,_to) {
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
     let firstYear;
     let lastYear;
     let from = _from;
     let to = _to;
 
+<<<<<<< HEAD
     if (_from === null || _to == null) {
       firstYear = 2010;
       const date = new Date();
       lastYear = date.getFullYear();
 
+=======
+    if(_from === null || _to == null){
+      firstYear = 2010;
+      const date = new Date();
+      lastYear = date.getFullYear();
+  
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
       from = `${firstYear}-1-1`;
       to = `${lastYear}-12-31`;
     }
@@ -186,7 +301,11 @@ export default class ExpensesAndIncome extends Component {
             });
           });
 
+<<<<<<< HEAD
           data.fixed_incomes.forEach(e => {
+=======
+          data.fixed_incomes.forEach(e=>{
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
             this.transectionReccuringType[e.type] = true;
           });
 
@@ -203,18 +322,30 @@ export default class ExpensesAndIncome extends Component {
   }
 
 
+<<<<<<< HEAD
   async getExpenseData(_from, _to) {
+=======
+  async getExpenseData(_from,_to) {
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
 
     let firstYear;
     let lastYear;
     let from = _from;
     let to = _to;
 
+<<<<<<< HEAD
     if (_from === null || _to == null) {
       firstYear = 2010;
       const date = new Date();
       lastYear = date.getFullYear();
 
+=======
+    if(_from === null || _to == null){
+      firstYear = 2010;
+      const date = new Date();
+      lastYear = date.getFullYear();
+  
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
       from = `${firstYear}-1-1`;
       to = `${lastYear}-12-31`;
     }
@@ -263,7 +394,11 @@ export default class ExpensesAndIncome extends Component {
             });
           });
 
+<<<<<<< HEAD
           data.fixed_expenses.forEach(e => {
+=======
+          data.fixed_expenses.forEach(e=>{
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
             this.transectionReccuringType[e.type] = true;
           });
 
@@ -286,6 +421,7 @@ export default class ExpensesAndIncome extends Component {
       newList[this.state.lastIncomeSelected].active = false;
     this.setState({ incomes: newList, lastIncomeSelected: index });
   }
+<<<<<<< HEAD
 
   setVisibility(e) {
     let visible = !this.state.typesVisibility[e];
@@ -293,6 +429,15 @@ export default class ExpensesAndIncome extends Component {
     obj[e] = visible;
     console.log(obj);
     this.setState({ typesVisibility: obj });
+=======
+  
+  setVisibility(e){
+    let visible = !this.state.typesVisibility[e];
+    let obj = {...this.state.typesVisibility};
+    obj[e] = visible;
+console.log(obj);
+    this.setState({typesVisibility:obj});
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
 
   }
 
@@ -304,20 +449,33 @@ export default class ExpensesAndIncome extends Component {
     this.setState({ expenses: newList, lastExpenseSelected: index });
   }
 
+<<<<<<< HEAD
   updatePeriod(e) {
     let dateFrom = new Date(this.fromDate.current.value);
     let dateTo = new Date(this.toDate.current.value);
     if (dateFrom.getTime() > dateTo.getTime()) {
+=======
+  updatePeriod(e){
+    let dateFrom = new Date(this.fromDate.current.value);
+    let dateTo = new Date(this.toDate.current.value);
+    if(dateFrom.getTime()>dateTo.getTime()) {
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
       alert("Please select a valid period");
       return;
     }
 
+<<<<<<< HEAD
     this.setPeriod(this.fromDate.current.value, this.toDate.current.value);
   }
+=======
+    this.setPeriod(this.fromDate.current.value,this.toDate.current.value);
+    }
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
 
   render() {
     return (
       <>
+<<<<<<< HEAD
         <div className={classes.FilterBar}>
           <div className={"row " + classes.DateFilterContainer}>
             <div className="col-md-1">
@@ -408,6 +566,82 @@ export default class ExpensesAndIncome extends Component {
           </div>
         </div>
 
+=======
+      <div className={"row "+classes.FilterBar}>
+        <div className="col-md-3">
+          <h2>Period</h2>
+        </div>
+        <div className="col-md-3">
+          <label htmlFor="from">From:  </label>
+          <input ref={this.fromDate} id="from" type="date"/>
+        </div>
+        <div className="col-md-3">
+          <label htmlFor="to">To:</label>
+          <input ref={this.toDate}  id="to" type="date"/>
+        </div>
+        <div className="col-md-3">
+          <button onClick={(e)=>{this.updatePeriod(e)}} className="btn btn-primary ">Filter</button>
+        </div>
+        <button onClick={()=>{this.sortDate()}}>Date</button>
+        <button onClick={()=>{this.sortAmount()}}>Amount</button>
+    
+    <div> 
+      {Object.keys(this.state.typesVisibility).map(
+        e =>{
+          return <><label htmlFor={e}>{e}</label> <input checked={this.state.typesVisibility[e]} id={e} type="checkbox" onChange={()=>{this.setVisibility(e)}}/></>
+        }
+      )}
+    </div>
+      </div>
+        <div className="row">
+          <div className="col-md-6">
+            <h1>Incomes:</h1> 
+            <ul className={classes.List}>
+              {
+                this.state.incomes.map((e, index) =>
+                  <li key={index} >
+                    <Item
+                      index={index}
+                      data={e}
+                      visible={this.state.typesVisibility[e.type]}
+                      onClick={this.handleIncomeClick.bind(this)}
+                      incomeExpense="Income"
+                    />
+                  </li>
+                )
+              }
+            </ul>
+            <div className={classes.Total}>
+              <b>Total:</b>
+              <span>{this.state.incomeSum}</span>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <h1>Expeses:</h1>
+            <ul className={classes.List}>
+              {
+                this.state.expenses.map((e, index) =>
+                
+               <li key={index} >
+                <Item
+                  index={index}
+                  visible={this.state.typesVisibility[e.type]}
+                  data={e}
+                  onClick={this.handleExpenseClick.bind(this)}
+                  incomeExpense="Expense"
+                />
+              </li>
+                )
+              }
+            </ul>
+            <div className={classes.Total}>
+              <b>Total:</b>
+              <span>{this.state.expenseSum}</span>
+            </div>
+          </div>
+        </div>
+        
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
       </>
     )
   }

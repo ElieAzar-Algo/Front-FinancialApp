@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 //import Register from './register/register.js';
 import Menu from './menu/menu';
 import AddIncome from './addIncome/addIncome';
+<<<<<<< HEAD
 import { BrowserRouter, Switch, Route, Router } from "react-router-dom";
 import Login from "./login/login";
 import Categories from "./categories/Categories";
@@ -12,6 +13,12 @@ import Report from "./report/Report";
 import ExpensesAndIncome from "./expensesAndIncomes/ExpensesAndIncome";
 import Home from "./home/Home";
 import NameBar from './nameBar/NameBar';
+=======
+import Test from './home/Test'
+import Report from './report/Report';
+import ExpensesAndIncome from './expensesAndIncomes/ExpensesAndIncome';
+
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
 
 function App() {
   const [pageName,setPageName] = useState("home");
@@ -20,6 +27,7 @@ function App() {
     setPageName(name);
   }
   return (
+<<<<<<< HEAD
     <>
       <BrowserRouter>
         <div className="row">
@@ -71,6 +79,13 @@ function App() {
         </div>
       </BrowserRouter>
     </>
+=======
+    <div className="App">
+      <header>
+        <ExpensesAndIncome/>
+      </header>
+    </div>
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
   );
 }
 

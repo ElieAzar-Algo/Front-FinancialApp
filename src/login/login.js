@@ -34,6 +34,7 @@ class Login extends React.Component {
     const result = await response.status;
     
     if (result == 200) {
+<<<<<<< HEAD
       var accessToken = res.access_token;
       var userId=res.user.name
       window.localStorage.setItem("token",accessToken)
@@ -41,6 +42,16 @@ class Login extends React.Component {
       alert("Login Successfully");
       this.setState({ autho: result });
        console.log(res);
+=======
+          alert("Login Successfully");
+          var accessToken = res.access_token;
+          alert("token: "+accessToken);
+          window.localStorage.setItem("token",accessToken)
+          this.setState({ autho: result });
+          
+            console.log(res);
+            
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
     } 
     else {
       alert("Login Failed");

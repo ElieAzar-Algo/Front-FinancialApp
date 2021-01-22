@@ -6,8 +6,12 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.14",
+<<<<<<< HEAD
     "@material-ui/core": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
+=======
+    "@material-ui/icons": "^4.11.2",
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -18,11 +22,16 @@
     "jquery": "^3.5.1",
     "node": "^15.4.0",
     "react": "^17.0.1",
+<<<<<<< HEAD
     "react-bootstrap": "^1.4.3",
     "react-bootstrap-toggle": "^2.3.2",
+=======
+    "react-bootstrap": "^1.4.0",
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
     "react-chartjs-2": "^2.11.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
+    "react-paginate": "^7.0.0",
     "react-pro-sidebar": "^0.5.0",
     "react-redux": "^7.2.2",
     "react-redux-form": "^1.16.14",

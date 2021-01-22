@@ -8,6 +8,7 @@
 }
 
 .FilterBar{
+<<<<<<< HEAD
     background-color: rgb(38, 37, 43);
     display: flex;
     flex-direction: column;
@@ -53,11 +54,15 @@
 }
 
 .SortingContainer{
+=======
+    background-color: blueviolet;
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
+<<<<<<< HEAD
 .SortingContainer h2{
     margin-right: 15px;
 }
@@ -107,3 +112,9 @@
 .ExpensesAndIncomeListsContainer{
     margin-top: 25px;
 }
+=======
+.FilterBar label{
+    margin-right: 5px;
+}
+
+>>>>>>> 7c53c4a4421f5156d9203644b696454d336ce276
